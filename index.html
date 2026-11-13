@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>ClassCard for Schools</title><meta name="description" content="Report cards for the whole class, done in one afternoon. One-time price, works offline.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: left-aligned hero with a miniature report card beside it, a three-step strip, a feature list, a dark pricing band, then FAQ. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#14202E; --muted:#556275; --line:#D5DBE3;
+  --accent:#0E6F63; --accent-ink:#FFFFFF; --accent-soft:#DCEFEB;
+  --band:#0F2A2E; --band-ink:#EAF4F2; --band-muted:#9FBDB8; --band-accent:#5CD0BC; --band-accent-ink:#06201C;
+  --font-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10161E; --surface:#18212C; --ink:#E8EDF3; --muted:#9AA8B8; --line:#2C3948;
+    --accent:#3FB8A6; --accent-ink:#06201C; --accent-soft:#17322F;
+    --band:#0A1C20; --band-ink:#EAF4F2; --band-muted:#8FAFAA; --band-accent:#5CD0BC; --band-accent-ink:#06201C;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10161E; --surface:#18212C; --ink:#E8EDF3; --muted:#9AA8B8; --line:#2C3948;
+  --accent:#3FB8A6; --accent-ink:#06201C; --accent-soft:#17322F;
+  --band:#0A1C20; --band-ink:#EAF4F2; --band-muted:#8FAFAA; --band-accent:#5CD0BC; --band-accent-ink:#06201C;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--font-body)}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:-.02em;text-wrap:balance;margin:0}
+.eyebrow{font:600 13px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px}
+.brand{display:flex;align-items:center;gap:10px;font:700 21px var(--font-display);letter-spacing:-.02em}
+.btn{display:inline-block;text-decoration:none;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:700 16px var(--font-body);padding:13px 22px;border-radius:8px}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft);filter:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px 48px;align-items:center;padding-block:28px 64px}
+.hero h1{font-size:clamp(34px,5.4vw,56px);line-height:1.04;font-weight:700}
+.hero .lead{margin:18px 0 26px;font-size:19px;color:var(--muted);max-width:34em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.fine{margin:16px 0 0;font-size:14.5px;color:var(--muted)}
+
+/* miniature report card, always paper white */
+.mock{background:#fff;color:#111;border:1px solid #CBD3DC;box-shadow:0 10px 34px rgba(10,20,35,.16);padding:18px;min-width:0;font:12px/1.35 "Source Sans 3",Calibri,Arial,sans-serif}
+.mock .mh{display:flex;justify-content:space-between;gap:10px;border-bottom:3px solid #0E6F63;padding-bottom:8px}
+.mock .mh b{display:block;font:700 16px "Bricolage Grotesque","Trebuchet MS",sans-serif}
+.mock .mh span{font-size:11px;color:#444}
+.mock .mh .r{text-align:right;white-space:nowrap}
+.mock .who{margin:10px 0 8px;font-size:11px;color:#444}
+.mock .who b{color:#111}
+.mock .tw{overflow-x:auto}
+.mock table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.mock th{background:#0E6F63;color:#fff;font-size:10px;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:4px 6px}
+.mock td{padding:4px 6px;border-bottom:1px solid #D5DBE2}
+.mock tbody tr:nth-child(even) td{background:#F3F5F7}
+.mock .n{text-align:right;font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace}
+.mock th.n{text-align:right}
+.mock .c{text-align:center;font-weight:700}
+.mock .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.mock .sum div{border:1px solid #B9C2CD;padding:5px;text-align:center}
+.mock .sum span{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+.mock .sum b{font:700 14px "Bricolage Grotesque","Trebuchet MS",sans-serif;color:#0E6F63}
+.mock .cm{border:1px solid #B9C2CD;padding:7px 8px;font-size:11.5px}
+.mock .cm i{display:block;font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-bottom:2px}
+.mock-cap{margin:10px 0 0;font-size:13px;color:var(--muted);text-align:center}
+
+/* sections */
+section{padding-block:56px}
+section h2{font-size:clamp(26px,3.6vw,38px);line-height:1.1;margin-bottom:12px}
+.sec-lead{color:var(--muted);max-width:36em;margin:0 0 30px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;list-style:none;margin:0;padding:0}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0}
+.steps .k{display:inline-block;font:500 13px var(--font-mono);color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:2px 8px;margin-bottom:10px}
+.steps h3{font-size:19px;margin-bottom:6px}
+.steps p{margin:0;color:var(--muted);font-size:16px}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:26px 40px}
+.feat div{min-width:0}
+.feat h3{font-size:18px;margin-bottom:4px}
+.feat p{margin:0;color:var(--muted);font-size:16px}
+
+/* pricing band */
+.band{background:var(--band);color:var(--band-ink)}
+.band .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px 56px;align-items:center;padding-block:60px}
+.band h2{color:var(--band-ink)}
+.band .sec-lead{color:var(--band-muted);margin:0}
+.price{font:700 64px/1 var(--font-display);letter-spacing:-.03em;margin:0 0 4px}
+.price small{font:600 16px var(--font-body);letter-spacing:0;color:var(--band-muted);margin-left:8px}
+.incl{list-style:none;margin:18px 0 24px;padding:0;display:grid;gap:8px}
+.incl li{padding-left:26px;position:relative}
+.incl li::before{content:"";position:absolute;left:2px;top:.5em;width:11px;height:6px;border-left:2.5px solid var(--band-accent);border-bottom:2.5px solid var(--band-accent);transform:rotate(-45deg)}
+.band .btn{background:var(--band-accent);border-color:var(--band-accent);color:var(--band-accent-ink)}
+.order-note{margin:14px 0 0;font-size:15px;color:var(--band-muted)}
+.pay{display:grid;gap:10px;margin:0 0 20px}
+.pay-row{border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:12px 14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;min-width:0}
+.pay-row b{display:block;font-size:15px}
+.pay-row span.v{font:500 17px var(--font-mono);overflow-wrap:anywhere}
+.pay-row small{display:block;color:var(--band-muted);font-size:14px}
+.btn.sm{padding:8px 14px;font-size:14.5px;background:transparent;color:var(--band-accent);border-color:var(--band-accent)}
+.steps-pay{margin:0 0 18px;padding-left:20px;color:var(--band-muted);font-size:15.5px}
+.steps-pay li{margin:3px 0}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:760px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:500 22px/1 var(--font-mono);color:var(--accent)}
+.faq details[open] summary::after{content:"\2212"}
+.faq p{margin:10px 0 0;color:var(--muted);font-size:16px}
+footer{padding-block:34px 48px;color:var(--muted);font-size:14.5px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:background .15s,filter .15s}}
+.legal-nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px}footer a{color:var(--muted)}</style></head><body>
+
+
+<header class="wrap nav">
+  <div class="brand">
+    <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="7" fill="var(--accent)"/><path d="M8 10h12M8 14.5h12M8 19h7" stroke="var(--accent-ink)" stroke-width="2" stroke-linecap="round"/></svg>
+    ClassCard
+  </div>
+  <a class="btn ghost js-buy" href="#order">Buy for $49</a>
+</header>
+
+<div class="wrap hero">
+  <div>
+    <p class="eyebrow">Report cards for schools</p>
+    <h1>Report cards for the whole class, done in one afternoon.</h1>
+    <p class="lead">Type in the marks. ClassCard works out totals, grades and class positions, writes a teacher's comment for every learner, and prints each card on one page with your school's name, logo and, if you want it, the learner's passport photo.</p>
+    <div class="ctas">
+      <a class="btn js-buy" href="#order">Buy ClassCard, $49</a>
+      <a class="btn ghost" id="demo-link" href="demo.html">Try the live demo</a>
+    </div>
+    <p class="fine">One file. Works without internet. No subscription.</p>
+  </div>
+  <div>
+    <div class="mock" aria-label="Example report card">
+      <div class="mh"><div><b>Hillview Primary School</b><span>Learning for life</span></div><div class="r"><span><b style="font-size:12px">Term 2 &middot; 2026</b>Grade 5 Blue</span></div></div>
+      <p class="who">Learner: <b>Fatima Hassan</b> &nbsp;&middot;&nbsp; Attendance: <b>62 of 62 days</b></p>
+      <div class="tw"><table>
+        <thead><tr><th>Subject</th><th class="n">Score</th><th class="n">Class avg</th><th class="c">Grade</th></tr></thead>
+        <tbody>
+          <tr><td>English</td><td class="n">91</td><td class="n">69.1</td><td class="c">A</td></tr>
+          <tr><td>Mathematics</td><td class="n">87</td><td class="n">66.6</td><td class="c">A</td></tr>
+          <tr><td>Science</td><td class="n">94</td><td class="n">66.8</td><td class="c">A</td></tr>
+          <tr><td>Social Studies</td><td class="n">89</td><td class="n">69.6</td><td class="c">A</td></tr>
+          <tr><td>Religious Education</td><td class="n">85</td><td class="n">75.6</td><td class="c">A</td></tr>
+          <tr><td>ICT</td><td class="n">96</td><td class="n">69.5</td><td class="c">A</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sum"><div><span>Average</span><b>90.3%</b></div><div><span>Grade</span><b>A</b></div><div><span>Position</span><b>1st of 8</b></div></div>
+      <div class="cm"><i>Class teacher's comment</i>Fatima has produced outstanding results this term. Her best result was in ICT (96%). Results are steady compared with last term. Attendance has been excellent. Keep aiming high.</div>
+    </div>
+    <p class="mock-cap">Example card from the sample class.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>From marks to printed cards in three steps</h2>
+    <p class="sec-lead">No templates to edit and no formulas to fix. The whole job is typing in marks.</p>
+    <ol class="steps">
+      <li><span class="k">Step 1</span><h3>Set up once</h3><p>Add your school name, logo, subjects and grading scale. Change only the term and class next time.</p></li>
+      <li><span class="k">Step 2</span><h3>Enter the marks</h3><p>Type them in, paste from Excel or Google Sheets, or import an .xlsx or .csv file. Check them on screen, then totals, grades and positions update as you go.</p></li>
+      <li><span class="k">Step 3</span><h3>Print or save as PDF</h3><p>One card per learner. Print them all, or download a separate PDF for each learner in one click.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <h2>What it takes off the teacher's desk</h2>
+    <p class="sec-lead">Report week is mostly arithmetic and writing the same kind of sentence thirty times. ClassCard does both.</p>
+    <div class="feat">
+      <div><h3>Grades and positions, worked out</h3><p>Averages, grades and class positions are calculated for you, including learners who tie.</p></div>
+      <div><h3>A comment for every learner</h3><p>Each comment reflects the learner's average, best subject, weak subject, attendance and change since last term. Teachers can edit any comment or ask for different wording.</p></div>
+      <div><h3>Your school's look and layout</h3><p>Add your name, motto, logo and colour. Choose Classic, Photo ID, or Compact with two cards on one page. Switch parts on or off, such as class average, position and signature lines.</p></div>
+      <div><h3>Passport photos</h3><p>Add a photo for each learner, or add a whole class at once. Photos named after the learner are matched automatically.</p></div>
+      <div><h3>Every class in one place</h3><p>Set up P1 to P7, S1 to S6 or your own classes. Each has its own learners, subjects and class positions.</p></div>
+      <div><h3>Import from Excel or CSV</h3><p>Bring in .xlsx or .csv files, check them on screen, and correct any name or mark before a card is made.</p></div>
+      <div><h3>Your subjects, your scale</h3><p>Any subjects, any maximum mark, and your own grade boundaries and remarks. Start from a preset and change what you need.</p></div>
+      <div><h3>Private and offline</h3><p>Learner data stays on the computer you use. Nothing is uploaded, and it works without internet. Turn on a password to encrypt what is saved.</p></div>
+      <div><h3>Backups and results export</h3><p>Save a backup of the whole school, protected by a password if you like, and export class results as a CSV.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="band" id="order">
+  <div class="wrap">
+    <div>
+      <h2>One price, yours to use every term</h2>
+      <p class="sec-lead">Pay once by card or other local methods and keep the file. No monthly fee and no login. See our <a href="refund.html" style="color:var(--band-accent)">refund policy</a>.</p>
+    </div>
+    <div>
+      <p class="price">$49<small>one-time</small></p>
+      <ul class="incl">
+        <li>The ClassCard file, ready to open in Chrome or Edge</li>
+        <li>Instant download after payment, by email and from your customer portal</li>
+        <li>Sample class so you can see it working first</li>
+        <li>Works offline on any computer</li>
+      </ul>
+      <a class="btn js-buy" href="#order" style="margin-bottom:18px">Buy ClassCard, $49</a>
+      <p class="price-ugx" id="price-ugx" hidden></p>
+      <div class="pay" id="pay" hidden></div>
+      <ol class="steps-pay" id="pay-steps" hidden>
+        <li>Pay by mobile money or the online link.</li>
+        <li>Send us the payment message and your school's name on WhatsApp.</li>
+        <li>We send your ClassCard file the same day.</li>
+      </ol>
+      <a class="btn" id="wa-btn" href="#order" hidden>Order on WhatsApp</a>
+      <p class="order-note" id="order-note" hidden>Ordering is not open yet. Please check back soon.</p>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Questions heads of school ask</h2>
+    <div class="faq" style="margin-top:24px">
+      <details><summary>Do we need internet?</summary><p>No. Save the file to a computer and open it in Chrome or Edge. It works without a connection.</p></details>
+      <details><summary>Can the cards show a passport photo?</summary><p>Yes. Add a photo for each learner on the Marks page. The Photo ID layout shows it large beside the learner's details, and the Classic and Compact layouts can show a smaller one.</p></details>
+      <details><summary>How do we get PDF report cards?</summary><p>Choose "Download a PDF for each learner (ZIP)" and you get one PDF per learner in a single click, named after the learner and ready to send to parents. You can also download one PDF for the whole class, or print the cards.</p></details>
+      <details><summary>Can we use our own subjects and grading scale?</summary><p>Yes. Subjects, the maximum mark and every grade boundary and remark can be changed in Setup.</p></details>
+      <details><summary>Where is our learners' data kept?</summary><p>In the browser on the computer where you use ClassCard. Nothing is sent anywhere. You can turn on a password to encrypt it, and save a backup file to move the data to another computer.</p></details>
+      <details><summary>Can we use it for several classes?</summary><p>Yes. Add as many classes as you need, such as P1 to P7 or S1 to S6. Each class has its own learners, subjects and class positions, and you print one class at a time.</p></details>
+      <details><summary>Does it work on a phone or tablet?</summary><p>Entering marks works on a phone, but a computer is best for printing the cards.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">ClassCard &middot; report cards for schools
+<div class="legal-nav"><a href="terms.html">Terms of Sale</a><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a></div></div>
+</footer>
+
+<script>
+(function(){
+  /* ORDER SETTINGS - fill in what you use. Anything left empty is hidden.
+     Use international format for phones, e.g. '256770000000'. */
+  var CFG={
+    dodoProductId:'',     /* paste your Dodo Payments product ID here, e.g. 'pdt_abc123' */
+    priceUGX:'',          /* e.g. '145,000' */
+    mtnNumber:'', mtnName:'',        /* MTN Mobile Money number and registered name */
+    airtelNumber:'', airtelName:'',  /* Airtel Money number and registered name */
+    whatsapp:'',          /* your WhatsApp number, e.g. '256770000000' */
+    payLink:''            /* optional online payment page (Pesapal, Flutterwave...) for cards and mobile money */
+  };
+  var $=function(id){return document.getElementById(id)};
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+  var rows=[],any=false;
+  function row(label,num,name){
+    rows.push('<div class="pay-row"><div><b>'+esc(label)+'</b><span class="v">'+esc(num)+'</span>'+(name?'<small>Name: '+esc(name)+'</small>':'')+'</div><button class="btn sm" type="button" data-copy="'+esc(num)+'">Copy number</button></div>');
+  }
+  if(CFG.mtnNumber)row('MTN Mobile Money',CFG.mtnNumber,CFG.mtnName);
+  if(CFG.airtelNumber)row('Airtel Money',CFG.airtelNumber,CFG.airtelName);
+  if(CFG.payLink)rows.push('<div class="pay-row"><div><b>Pay online</b><small>Card or mobile money</small></div><a class="btn sm" href="'+esc(CFG.payLink)+'" target="_blank" rel="noopener">Open payment page</a></div>');
+  any=rows.length>0||!!CFG.whatsapp;
+  if(CFG.priceUGX){var u=$('price-ugx');u.textContent='UGX '+CFG.priceUGX+' for schools in Uganda';u.hidden=false;u.style.margin='0 0 14px';u.style.color='var(--band-muted)'}
+  if(rows.length){var p=$('pay');p.innerHTML=rows.join('');p.hidden=false;$('pay-steps').hidden=false;
+    p.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(!b)return;var t=b.getAttribute('data-copy');
+      var done=function(){b.textContent='Copied'};
+      var fb=function(){var r=document.createRange();var v=b.parentNode.querySelector('.v');r.selectNodeContents(v);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press copy'};
+      try{navigator.clipboard.writeText(t).then(done,fb)}catch(x){fb()}});}
+  if(CFG.whatsapp){var m='Hello, I would like to order ClassCard for my school. School name: ';
+    var w=$('wa-btn');w.href='https://wa.me/'+CFG.whatsapp.replace(/\D/g,'')+'?text='+encodeURIComponent(m);w.target='_blank';w.rel='noopener';w.hidden=false}
+  var btns=document.querySelectorAll('.js-buy');
+  if(CFG.dodoProductId){
+    any=true;
+    var base=location.href.split('#')[0].replace(/[^\/]*$/,'');
+    var url='https://checkout.dodopayments.com/buy/'+encodeURIComponent(CFG.dodoProductId)+'?quantity=1&redirect_url='+encodeURIComponent(base+'thank-you.html');
+    for(var j=0;j<btns.length;j++){btns[j].setAttribute('href',url);btns[j].removeAttribute('target')}
+  }
+  for(var i=0;i<btns.length;i++){
+    if(CFG.dodoProductId) continue;
+    btns[i].addEventListener('click',function(){if(!any){var n=$('order-note');if(n)n.hidden=false}});
+  }
+  if(!any){}
+})();
+</script>
+</body></html>
